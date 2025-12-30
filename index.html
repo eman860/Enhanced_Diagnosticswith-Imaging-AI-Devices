@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Radiology Triage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span>Agentic Radiology Triage</span>
+            </div>
+            <div class="status-indicator">
+                <span class="dot online"></span> System Online
+            </div>
+        </header>
+
+        <main>
+            <section class="triage-input">
+                <div class="card glass-panel">
+                    <h2>New Case Entry</h2>
+                    <form id="triage-form">
+                        <div class="form-group">
+                            <label for="patient-id">Patient ID</label>
+                            <input type="text" id="patient-id" placeholder="e.g. PT-001" autocomplete="off" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modality">Modality</label>
+                            <select id="modality">
+                                <option value="CXR">Chest X-Ray (CXR)</option>
+                                <option value="CT_HEAD">Head CT</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="history">Clinical History (Optional)</label>
+                            <textarea id="history" rows="3" placeholder="Brief history..."></textarea>
+                        </div>
+
+                        <button type="submit" id="submit-btn">
+                            <span class="btn-text">Run AI Analysis</span>
+                            <div class="loader hidden"></div>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="triage-output" id="output-section">
+                <!-- Results will be injected here -->
+                <div class="placeholder-state">
+                    <p>Select a patient case to begin analysis</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Template for Results -->
+    <template id="result-template">
+        <div class="card glass-panel result-card fade-in">
+            <div class="result-header">
+                <div>
+                    <h3>Triage Report</h3>
+                    <p class="patient-ref">Patient: <span id="res-patient-id"></span></p>
+                </div>
+                <div class="badges">
+                    <span id="res-priority" class="badge"></span>
+                    <span id="res-confidence" class="confidence-pill"></span>
+                </div>
+            </div>
+            
+            <div class="visualization-mock">
+                <div class="vis-overlay">AI Attention Map Generated</div>
+            </div>
+
+            <div class="finding-section">
+                <h4>Visual Findings</h4>
+                <ul id="res-findings" class="findings-list"></ul>
+            </div>
+
+            <div class="finding-section">
+                <h4>Recommendation</h4>
+                <p id="res-recommendation" class="recommendation-text"></p>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
